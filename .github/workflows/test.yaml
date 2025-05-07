@@ -1,0 +1,23 @@
+name: Test APT Repository
+on:
+    workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install repo
+        run: |
+          sudo curl -sfLo /etc/apt.trusted.gpg.d/caupain-keyring.asc https://bishiboosh.github.io/test-debian-repo/gpg.key
+          sudo echo "deb https://bishiboosh.github.io/test-debian-repo/ stable main" >/etc/apt/sources.list.d/caupain.list
+      - name: Install package
+        run: |
+          sudo apt update
+          sudo apt install -y caupain
+      - name: Launch package
+        run: |
+          which caupain
+          caupain --version
