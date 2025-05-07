@@ -11,8 +11,13 @@ jobs:
     steps:
       - name: Install repo
         run: |
-          sudo curl -sfLo /etc/apt.trusted.gpg.d/caupain-keyring.asc https://bishiboosh.github.io/test-debian-repo/gpg.key
-          sudo echo "deb https://bishiboosh.github.io/test-debian-repo/ stable main" >/etc/apt/sources.list.d/caupain.list
+          curl -sfLo caupain-keyring.asc https://bishiboosh.github.io/test-debian-repo/gpg.key
+          mkdir -p /etc/apt/trusted.gpg.d/
+          mv caupain-keyring.asc /etc/apt/trusted.gpg.d/caupain-keyring.asc
+          echo "deb https://bishiboosh.github.io/test-debian-repo/ stable main" >caupain.list
+          mkdir -p /etc/apt/sources.list.d/
+          mv caupain.list /etc/apt/sources.list.d/caupain.list
+          
       - name: Install package
         run: |
           sudo apt update
