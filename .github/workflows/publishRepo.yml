@@ -25,7 +25,7 @@ jobs:
         uses: actions/configure-pages@v4
       - name: Get last DEB package
         run: wget https://github.com/bishiboosh/caupain/releases/download/v0.2.0/caupain_0.2.0-1_amd64.deb
-      - uses: morph027/apt-repo-action@v2
+      - uses: morph027/apt-repo-action@v3.6
         id: create-apt-repo
         with:
           repo-name: ${{ env.REPO_NAME }}
