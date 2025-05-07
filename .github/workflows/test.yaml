@@ -10,11 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install repo
-        run: |
-          sudo mkdir -p /usr/share/keyrings/  
-          curl -sfLo /usr/share/keyrings/caupain.gpg.key https://bishiboosh.github.io/test-debian-repo/gpg.key
-          echo "deb [signed-by=/usr/share/keyrings/caupain.gpg.key] https://bishiboosh.github.io/test-debian-repo/ stable main" > sudo tee -a /etc/apt/sources.list.d/caupain.list
-          
+        uses: gerlero/add-apt-repository@v1
+        with:
+          uri: https://bishiboosh.github.io/test-debian-repo/
+          suite: stable
+          key: https://bishiboosh.github.io/test-debian-repo/gpg.key
       - name: Install package
         run: |
           sudo apt update
